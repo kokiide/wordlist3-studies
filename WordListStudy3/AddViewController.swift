@@ -9,27 +9,45 @@
 import UIKit
 
 class AddViewController: UIViewController {
+    
+    @IBOutlet var englishTextField: UITextField!
+    @IBOutlet var japaneseTextField: UITextField!
+    
+    var wordArray: [Dictionary<String, String>] = []
+    
+    let saveData = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if saveData.array(forKey: "WORD") != nil /* != means "doesn't equal" */ {
+            wordArray = saveData.array(forKey: "WORD") as! [Dictionary<String, String>]
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func saveWord() {
+        let wordDictionary = ["english": englishTextField.text!, "japanese": japaneseTextField.text!]
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+        wordArray.append(wordDictionary) //appendで、要素を追加！
+        saveData.set(wordArray, forKey: "WORD")
+        
+        let alert = UIAlertController(
+            title: "保存完了",
+          message: "単語の保存が完了しました",
+   preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: nil
+            ))
+        
+        self.present(alert, animated:true, completion: nil)
+        englishTextField.text = ""
+        japaneseTextField.text = ""
 }
+}//added "}" to get rid of error

@@ -19,6 +19,35 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func back(segue: UIStoryboardSegue){
+        
+    }
+    
+    @IBAction func startButtonTapped() {
+        //saveDataというUserDefaults から
+        let saveData = UserDefaults.standard
+        //WORD というKeyを使って、配列があるかチェック
+        if let wordArray = saveData.array(forKey: "WORD"){
+            if wordArray.count > 0 {
+                self.performSegue(withIdentifier: "toQuestionView", sender: nil)
+            }
+        }
+        
+        let alert: UIAlertController = UIAlertController (
+            title: "単語",
+            message: "まずは、「単語一覧」をタップして単語登録をしてください。",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: nil
+        ))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 
 
 }

@@ -49,5 +49,5 @@ class AddViewController: UIViewController {
         self.present(alert, animated:true, completion: nil)
         englishTextField.text = ""
         japaneseTextField.text = ""
+}//added "}" to get rid of error underneath
 }
-}//added "}" to get rid of error

@@ -65,6 +65,10 @@ class QuestionViewController: UIViewController {
                 //ボタンのタイトルを変更
                 nextButton.setTitle("答えを表示", for: .normal)
             } else {
+                self.performSegue(withIdentifier: "toFinishView", sender: nil)
+            }
+            
+        } else {
             //答えを表示する
             answerLabel.text = shuffledWordArray[nowNumber]["japanese"]
                 //isAnsweredをtrueにする
@@ -74,6 +78,3 @@ class QuestionViewController: UIViewController {
             }
         }
     }
-
-
-}
